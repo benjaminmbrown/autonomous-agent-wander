@@ -6,7 +6,7 @@ var Vehicle = function(x, y) {
     this.maxSpeed = 4;
     this.maxForce = 0.1;
 
-    this.wanderDistance = 100; //cente
+    this.wanderDistance = 50; //cente
     this.wanderRadius = 20;
     this.wanderTheta = 0;
 
@@ -95,14 +95,26 @@ var Vehicle = function(x, y) {
         rotate(theta);
         beginShape();
         vertex(0, -this.r * 2);
-        vertex(-this.r, this.r * 2);
+        vertex(-this.r, this.r *2);
         vertex(this.r, this.r * 2);
         endShape(CLOSE);
+        // beginShape(LINES);
+        // vertex(0, this.wanderDistance);
+        // endShape();
+
+        ellipseMode(CENTER);
+        fill(127);
+        stroke(200);
+        strokeWeight(2);
+        line(0, this.r*2, wanderX, wanderY);
+        ellipse(wanderX, wanderY, 18, 18);
+
         pop();
 
-        ellipse(wanderX + width / 2, wanderY + height / 2, 10, 10);
-        this.wanderTheta += 0.01;
-        console.log(this.wanderTheta)
+
+        // ellipse(wanderX + width / 2, wanderY + height / 2, 10, 10);
+        //  this.wanderTheta += 0.01;
+        // console.log(this.wanderTheta)
     }
 
     //inverse of seek 

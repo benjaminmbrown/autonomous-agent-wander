@@ -23,7 +23,7 @@ function draw(){
 
 	//vehicle.wander();
 	//vehicle.update();
-	vehicle.flee(enemy);
+	vehicle.seek(mouse);
 	vehicle.update();
 	vehicle.display();
 
