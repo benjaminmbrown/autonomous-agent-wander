@@ -6,6 +6,11 @@ var Vehicle = function(x, y) {
     this.maxSpeed = 4;
     this.maxForce = 0.1;
 
+    this.wanderDistance = 100; //cente
+    this.wanderRadius = 20;
+    this.wanderTheta = 0;
+
+
     this.seek = function(target) {
         var desired = p5.Vector.sub(target, this.position);
         //desired.normalize();
@@ -17,28 +22,28 @@ var Vehicle = function(x, y) {
 
     this.wander = function() {
 
-        //use polar coordinates to calc vehicles target along path
-        var distanceFromSelf = 100; //dist away from self
-        var radius = 50; //radius of deisred path circle
-        var degreeOfSteer = random(1, 360); //random degree of movement
+        // //use polar coordinates to calc vehicles target along path
+        // var distanceFromSelf = 100; //dist away from self
+        // var radius = 50; //radius of deisred path circle
+        // var degreeOfSteer = random(1, 360); //random degree of movement
 
 
-        var desired = p5.Vector.sub(target, this.position); //vector pointing FROM loc TO target
-        var distance = desired.mag();
-        //damping within 100 pixels
+        // var desired = p5.Vector.sub(target, this.position); //vector pointing FROM loc TO target
+        // var distance = desired.mag();
+        // //damping within 100 pixels
 
 
-        if (distance < 100) {
-            //set magnitude according to how close we are
-            var scaledSpeed = map(distance, 0, 100, 0, this.maxSpeed);
-            desired.setMag(scaledSpeed);
-        } else { desired.setMag(this.maxSpeed) }
+        // if (distance < 100) {
+        //     //set magnitude according to how close we are
+        //     var scaledSpeed = map(distance, 0, 100, 0, this.maxSpeed);
+        //     desired.setMag(scaledSpeed);
+        // } else { desired.setMag(this.maxSpeed) }
 
-        //Steer - desired minus velocity
+        // //Steer - desired minus velocity
 
-        var steer = p5.Vector.sub(desired, this.velocity); //steer = desired-velocity
-        steer.limit(this.maxForce);
-        this.applyForce(steer);
+        // var steer = p5.Vector.sub(desired, this.velocity); //steer = desired-velocity
+        // steer.limit(this.maxForce);
+        // this.applyForce(steer);
 
     }
 
@@ -80,6 +85,8 @@ var Vehicle = function(x, y) {
 
     this.display = function() {
         var theta = this.velocity.heading() + PI / 2;
+        var wanderX = this.wanderRadius * cos(this.wanderTheta);
+        var wanderY = this.wanderRadius * sin(this.wanderTheta);
         fill(127);
         stroke(200);
         strokeWeight(1);
@@ -92,6 +99,10 @@ var Vehicle = function(x, y) {
         vertex(this.r, this.r * 2);
         endShape(CLOSE);
         pop();
+
+        ellipse(wanderX + width / 2, wanderY + height / 2, 10, 10);
+        this.wanderTheta += 0.01;
+        console.log(this.wanderTheta)
     }
 
     //inverse of seek 

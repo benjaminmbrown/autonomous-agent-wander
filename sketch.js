@@ -21,10 +21,10 @@ function draw(){
 	ellipse(mouse.x,mouse.y, 48,48);
 	ellipse(enemy.x,enemy.y, 48,48);
 
-	vehicle.wander();
-	vehicle.update();
-	//vehicle.flee(enemy);
+	//vehicle.wander();
 	//vehicle.update();
+	vehicle.flee(enemy);
+	vehicle.update();
 	vehicle.display();
 
 }
