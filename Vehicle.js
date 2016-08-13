@@ -15,25 +15,48 @@ var Vehicle = function(x, y) {
         this.applyForce(steer);
     }
 
-    this.wander = function(){
+    this.wander = function() {
 
-    }
+        //use polar coordinates to calc vehicles target along path
+        var distanceFromSelf = 100; //dist away from self
+        var radius = 50; //radius of deisred path circle
+        var degreeOfSteer = random(1, 360); //random degree of movement
 
-    this.arrive = function(target) {
-        var desired = p5.Vector.sub(target,this.position); //vector pointing FROM loc TO target
+
+        var desired = p5.Vector.sub(target, this.position); //vector pointing FROM loc TO target
         var distance = desired.mag();
         //damping within 100 pixels
 
 
         if (distance < 100) {
-        	//set magnitude according to how close we are
+            //set magnitude according to how close we are
             var scaledSpeed = map(distance, 0, 100, 0, this.maxSpeed);
             desired.setMag(scaledSpeed);
         } else { desired.setMag(this.maxSpeed) }
 
         //Steer - desired minus velocity
 
-        var steer = p5.Vector.sub(desired, this.velocity);//steer = desired-velocity
+        var steer = p5.Vector.sub(desired, this.velocity); //steer = desired-velocity
+        steer.limit(this.maxForce);
+        this.applyForce(steer);
+
+    }
+
+    this.arrive = function(target) {
+        var desired = p5.Vector.sub(target, this.position); //vector pointing FROM loc TO target
+        var distance = desired.mag();
+        //damping within 100 pixels
+
+
+        if (distance < 100) {
+            //set magnitude according to how close we are
+            var scaledSpeed = map(distance, 0, 100, 0, this.maxSpeed);
+            desired.setMag(scaledSpeed);
+        } else { desired.setMag(this.maxSpeed) }
+
+        //Steer - desired minus velocity
+
+        var steer = p5.Vector.sub(desired, this.velocity); //steer = desired-velocity
         steer.limit(this.maxForce);
         this.applyForce(steer);
 
