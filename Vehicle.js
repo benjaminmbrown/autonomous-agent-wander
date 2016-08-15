@@ -98,10 +98,8 @@ var Vehicle = function(x, y) {
         vertex(-this.r, this.r *2);
         vertex(this.r, this.r * 2);
         endShape(CLOSE);
-        // beginShape(LINES);
-        // vertex(0, this.wanderDistance);
-        // endShape();
 
+        //Draw debug lines for wander
         ellipseMode(CENTER);
         fill(127);
         stroke(200);
@@ -112,9 +110,7 @@ var Vehicle = function(x, y) {
         pop();
 
 
-        // ellipse(wanderX + width / 2, wanderY + height / 2, 10, 10);
-        //  this.wanderTheta += 0.01;
-        // console.log(this.wanderTheta)
+ 
     }
 
     //inverse of seek 

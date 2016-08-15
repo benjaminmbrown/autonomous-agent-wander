@@ -21,15 +21,8 @@ function draw(){
 	ellipse(mouse.x,mouse.y, 48,48);
 	ellipse(enemy.x,enemy.y, 48,48);
 
-	//vehicle.wander();
-	//vehicle.update();
-	vehicle.seek(mouse);
+	vehicle.wander();
 	vehicle.update();
 	vehicle.display();
 
 }
-
-function mousePressed(){
-	//particleSystems.push(new Vehicle(1,createVector(mouseX,mouseY)));
-}
-
