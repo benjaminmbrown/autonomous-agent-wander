@@ -4,7 +4,7 @@ var vehicle;
 
 function setup() {
  createCanvas(640, 360);
- setFrameRate(20);
+ setFrameRate(30);
  vehicle = new Vehicle(width/2, height/2);
 
 
@@ -21,7 +21,7 @@ function draw(){
 	ellipse(mouse.x,mouse.y, 48,48);
 	ellipse(enemy.x,enemy.y, 48,48);
 
-	vehicle.seek(mouse);
+	vehicle.wander();
 	vehicle.update();
 	vehicle.display();
 
