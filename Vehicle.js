@@ -4,7 +4,7 @@ var Vehicle = function(x, y) {
     this.position = createVector(x, y);
     this.r = 6;
     this.maxSpeed = 4;
-    this.maxForce = 0.1;
+    this.maxForce = 0.2;
 
 
     this.wanderRadius = 19;
@@ -50,6 +50,7 @@ var Vehicle = function(x, y) {
         //wander angle += (math.random() * angle_change) - (angle_change * 0.5);
 
         this.wanderForce = this.wanderCenter.add(displacement);
+        this.wanderForce.limit(this.maxForce)
 
         //returns steering force that pushed the agent toward target
         this.applyForce(this.wanderForce);
