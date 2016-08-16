@@ -85,8 +85,11 @@ var Vehicle = function(x, y) {
 
     this.display = function() {
         var theta = this.velocity.heading() + PI / 2;
+        console.log("heading:",this.velocity.heading());
+
         var wanderX = this.wanderRadius * cos(this.wanderTheta);
         var wanderY = this.wanderRadius * sin(this.wanderTheta);
+
         fill(127);
         stroke(200);
         strokeWeight(1);
@@ -104,7 +107,7 @@ var Vehicle = function(x, y) {
         fill(127);
         stroke(200);
         strokeWeight(2);
-        line(0, this.r*2, wanderX, wanderY);
+        line(this.r, this.r, wanderX, wanderY);
         ellipse(wanderX, wanderY, 18, 18);
 
         pop();
